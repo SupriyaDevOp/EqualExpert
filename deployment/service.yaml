@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: equalexpert-api
+  namespace: equalexpert
+  labels:
+    app: equalexpert-api
+spec:
+  selector:
+    app: equalexpert-api
+  type: LoadBalancer       # Docker Desktop maps LoadBalancer to localhost automatically
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080

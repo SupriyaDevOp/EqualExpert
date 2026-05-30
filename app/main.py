@@ -3,6 +3,11 @@ import httpx
 
 app = FastAPI()
 
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
 GITHUB_API_BASE = "https://api.github.com"
 GITHUB_HEADERS = {
     "Accept": "application/vnd.github+json",
