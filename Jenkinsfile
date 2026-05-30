@@ -37,10 +37,13 @@ pipeline {
 
         stage('Test') {
             steps {
+                // --volumes-from shares the Jenkins container's volumes (including the workspace)
+                // with the sibling container. A plain -v mount won't work here because the Docker
+                // daemon is on the host and has no knowledge of paths inside the Jenkins container.
                 sh """
                     docker run --rm \\
-                        -v \${WORKSPACE}:/app \\
-                        -w /app \\
+                        --volumes-from jenkins-local \\
+                        -w \${WORKSPACE} \\
                         python:3.12-slim \\
                         sh -c "pip install --no-cache-dir -r requirements.txt && pytest tests/ -v --tb=short"
                 """
