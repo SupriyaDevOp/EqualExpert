@@ -87,9 +87,11 @@ pipeline {
                 }
             }
             steps {
+                // LoadBalancer is on the Windows host, not inside the Jenkins container.
+                // host.docker.internal resolves to the host from within any container.
                 sh """
                     for i in \$(seq 1 12); do
-                        if curl -sf http://localhost/health > /dev/null 2>&1; then
+                        if curl -sf http://host.docker.internal/health > /dev/null 2>&1; then
                             echo 'App is up'
                             exit 0
                         fi
@@ -105,7 +107,7 @@ pipeline {
 
     post {
         success {
-            echo "Deployment successful — http://localhost/docs"
+            echo "Deployment successful — http://localhost/docs (open in your browser on Windows)"
         }
         failure {
             sh "kubectl --context=${KUBE_CONTEXT} describe pods -n ${NAMESPACE} -l app=equalexpert-api || true"
