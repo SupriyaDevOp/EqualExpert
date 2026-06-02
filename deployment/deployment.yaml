@@ -11,7 +11,8 @@ spec:
       name: my-pod
   template:
     metadata:
-      name: my-pod
+      labels:
+        name: my-pod
     spec:
       containers:
         - name: equalexpert
