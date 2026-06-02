@@ -36,9 +36,9 @@ pipeline{
         stage('Deploy'){
             steps{
                 sh """
-                    kubectl apply -f k8s/namespace.yaml -n ${namespace}
-                    kubectl apply -f k8s/deployment.yaml -n ${namespace}
-                    kubectl apply -f k8s/service.yaml -n ${namespace}
+                    kubectl apply -f deployment/namespace.yaml -n ${namespace}
+                    kubectl apply -f deployment/deployment.yaml -n ${namespace}
+                    kubectl apply -f deployment/service.yaml -n ${namespace}
                 """
             }
         }
