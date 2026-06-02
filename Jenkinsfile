@@ -24,7 +24,9 @@ pipeline{
 
         stage('Build'){
             steps{
+               sh """
                docker build -t ${imageName}:latest .
+               """
             }
         }
         stage('Test'){
