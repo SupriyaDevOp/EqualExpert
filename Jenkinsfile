@@ -17,6 +17,7 @@ pipeline{
                 sh """ 
                     mkdir -p /tmp/kube
                     sed 's|https://127.0.0.1:|https://host.docker.internal:|g' ~/.kube/config > /tmp/kube/config
+                    kubectl config set-cluster docker-desktop --insecure-skip-tls-verify=true
                 """
             }
         }
