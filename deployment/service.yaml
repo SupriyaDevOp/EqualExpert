@@ -4,7 +4,7 @@ metadata:
   name: my-service
 spec:
   selector:
-    name: my-app
+    name: my-pod
   type: LoadBalancer
   ports:
     - name: http
